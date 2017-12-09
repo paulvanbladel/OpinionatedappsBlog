@@ -1,0 +1,4 @@
+baseURL = "http://blog2.opinionatedapps.com/"
+languageCode = "en-us"
+title = "Opinionatedapps blog"
+theme = "ananke"
