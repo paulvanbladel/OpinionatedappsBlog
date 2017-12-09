@@ -1,4 +1,4 @@
-baseURL = "http://blog2.opinionatedapps.com/"
+baseURL = "http://blog.opinionatedapps.com/"
 languageCode = "en-us"
 title = "Opinionatedapps blog"
 theme = "ananke"
