@@ -57,4 +57,4 @@ In an next post, I'll dive a bit deeper into the internals of this plugin.
 
 Cheers
 
-paul.
+paul
