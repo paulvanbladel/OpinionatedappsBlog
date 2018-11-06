@@ -15,7 +15,7 @@ Under a specific set of conditions, elastic search functionality can be provided
 
 In this blog post, I'll demonstrate this with a VueJs Single page application with the brilliant [Quasar framework](https://quasar-framework.org/).
 
-## moving the meet of the elastic search to the browser
+## moving the meat of the elastic search to the browser
 
 In the solution i'm proposing, I'm completely eliminating all server side elastic search functionality. For this blog post, it's even indifferent where the data we present in the typeical elastic search manner, come from.
 
@@ -28,8 +28,8 @@ So let's explorer how we can build such a search screen with VueJs
 
 ## how does our data look like.
 
-As said, we presume that there is a data retrieval process in place (e.g. via a browser database). On order to be able to focus completely on the elastic search presentation part, in my sample I baked the data directly in the SPA under the form of a 
-json document.
+As said, we presume that there is a data retrieval process in place (e.g. via a browser database). On order to be able to focus completely on the elastic search presentation part, 
+in my sample I baked the data directly in the SPA under the form of a json document.
 One record in that json doc looks like:
 ```
  {

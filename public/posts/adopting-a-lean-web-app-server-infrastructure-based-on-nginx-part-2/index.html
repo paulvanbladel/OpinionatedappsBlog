@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Opinionatedapps blog  | Adopting a lean web app server infrastructure based on nginx (part 2/3)</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.30.2" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Adopting a lean web app server infrastructure based on nginx (part 2/3)" />
+<meta property="og:description" content="##Enjoy the mechanical sympathy of nginx? For me, the most important aspect for selecting nginx (pronounce Engine-X) is the fact that it basically uses an event-driven architecture for handling request in an asynchronous matter, much like nodeJs is working. In other words, it doesn&rsquo;t rely on threads to handle requests. Since we&rsquo;ll jump soon on the nodeJs bandwagon, you&rsquo;ll start to like this type of mechanical sympathy. All this makes nginx very lightweight and super fast." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.opinionatedapps.com/posts/adopting-a-lean-web-app-server-infrastructure-based-on-nginx-part-2/" />
+
+
+
+<meta property="article:published_time" content="2015-01-15T14:38:18&#43;00:00"/>
+
+<meta property="article:modified_time" content="2015-01-15T14:38:18&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Adopting a lean web app server infrastructure based on nginx (part 2/3)">
+<meta itemprop="description" content="##Enjoy the mechanical sympathy of nginx? For me, the most important aspect for selecting nginx (pronounce Engine-X) is the fact that it basically uses an event-driven architecture for handling request in an asynchronous matter, much like nodeJs is working. In other words, it doesn&rsquo;t rely on threads to handle requests. Since we&rsquo;ll jump soon on the nodeJs bandwagon, you&rsquo;ll start to like this type of mechanical sympathy. All this makes nginx very lightweight and super fast.">
+
+
+<meta itemprop="datePublished" content="2015-01-15T14:38:18&#43;00:00" />
+<meta itemprop="dateModified" content="2015-01-15T14:38:18&#43;00:00" />
+<meta itemprop="wordCount" content="1020">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Adopting a lean web app server infrastructure based on nginx (part 2/3)"/>
+<meta name="twitter:description" content="##Enjoy the mechanical sympathy of nginx? For me, the most important aspect for selecting nginx (pronounce Engine-X) is the fact that it basically uses an event-driven architecture for handling request in an asynchronous matter, much like nodeJs is working. In other words, it doesn&rsquo;t rely on threads to handle requests. Since we&rsquo;ll jump soon on the nodeJs bandwagon, you&rsquo;ll start to like this type of mechanical sympathy. All this makes nginx very lightweight and super fast."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-dark-green">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://blog.opinionatedapps.com/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Opinionatedapps blog
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Adopting a lean web app server infrastructure based on nginx (part 2/3)</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2015-01-15T14:38:18Z">January 15, 2015</time>      
+      
+      
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>##Enjoy the mechanical sympathy of nginx?
+For me, the most important aspect for selecting <a href="http://wiki.nginx.org/Main">nginx</a> (pronounce Engine-X) is the fact that it basically uses an <strong>event-driven architecture for handling request in an asynchronous matter</strong>, much like nodeJs is working. In other words, it doesn&rsquo;t rely on threads to handle requests.  Since we&rsquo;ll jump soon on the nodeJs bandwagon, you&rsquo;ll start to like this type of <a href="http://martinfowler.com/articles/lmax.html">mechanical sympathy</a>.
+All this makes nginx very lightweight and super fast.
+Furthermore, nginx has a significant market share next to Apache and IIS.</p>
+
+<p>##Install git and nodeJs on Ubuntu
+Ubuntu uses the<a href="https://help.ubuntu.com/community/AptGet/Howto"> APT package manager</a>.
+Let&rsquo;s start with Git:
+<pre><code class="language-bash" >sudo apt-get install git</code></pre>
+and then NodeJs:
+Update march 2015: there can be occasions where you want to follow <a href="https://www.digitalocean.com/community/tutorials/how-to-install-an-upstream-version-of-node-js-on-ubuntu-12-04">this</a> approach for installing nodeJs.</p>
+
+<pre><code class="language-bash">sudo apt-get install nodejs</code></pre>
+we'll need also npm, the node package manager:
+<pre><code class="language-bash" >sudo apt-get install npm</code></pre>
+On Ubuntu (and Debian in general), the name of the Node.js interpreter is changed to NodeJS (instead of Node). It's best to change this back to node by creating a symlink, this can be done by installing following package:
+<pre><code class="language-bash" >sudo apt-get install nodejs-legacy</code></pre>
+A more experienced linux user will install them all with a one liner:
+<pre><code class="language-bash">sudo apt-get install git nodejs npm nodejs-legacy</code></pre>
+
+<p>##Install nginx
+<pre><code class="language-bash">sudo apt-get install nginx</code></pre></p>
+
+<p>##Check if the server is working
+<img src="http://blog.opinionatedapps.com/content/images/2015/01/nginx2_1.png" alt="" />
+Obviously, you can configure your DNS in such a way the IP address points to www.MySite.com.
+We&rsquo;ll need to do this anyway in later examples where we create a static site in a sub domain.
+Bottomline so far is that installing a web server software on Ubuntu is really a piece of cake and a matter of 30 seconds. That&rsquo;s the way we want it.</p>
+
+<p>##Show me now a nice UI for configuring Nginx
+In case you are expecting now to be able to use a fancy graphical user interface for configuring everything, I need to disappoint you. Nginx (and yeah, everything else in linux) needs to be configured via config files from the command prompt.
+That&rsquo;s really a huge difference with the windows world where a lot of energy is spent for building good looking interfaces. Anyhow something like IIS stores it&rsquo;s information that is entered via the UI also in xml config files, which you only need if you messed things completely up in the UI interface. In that scenario, you can pray and hope that you understand everything what you are doing. In the linux world you need that knowledge from day 1, that&rsquo;s the difference, but you are in case of trouble better prepared.
+On the other hand, what is important is the amount of lines that need to be &lsquo;written&rsquo; for configuring an additional site/application.
+Finaly, these types of config files let themselves integrate elegantly in an auomated software factory approach.</p>
+
+<p>##Let&rsquo;s get some basic understanding of the nginx configuration files
+Let&rsquo;s inspect the base configuration file of nginx located in  /etc/nginx/nginx.conf by typing:
+<pre><code class="language-bash">cat /etc/nginx/nginx.conf</code></pre>
+This will give us following content:
+<pre style="background-color:lightgrey"><code >
+user www-data;
+worker_processes 4;
+pid /run/nginx.pid;</p>
+
+<p>events {
+        worker_connections 768;
+        # multi_accept on;
+}</p>
+
+<p>http {
+        ##
+        # Basic Settings
+        ##</p>
+
+<pre><code>    sendfile on;
+    tcp_nopush on;
+    tcp_nodelay on;
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+    # server_tokens off;
+
+    # server_names_hash_bucket_size 64;
+    # server_name_in_redirect off;
+
+    include /etc/nginx/mime.types;
+    default_type application/octet-stream;
+
+    ##
+    # Logging Settings
+    ##
+
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
+
+    ##
+    # Gzip Settings
+    ##
+
+    gzip on;
+    gzip_disable &quot;msie6&quot;;
+
+    # gzip_vary on;
+    # gzip_proxied any;
+    # gzip_comp_level 6;
+    # gzip_buffers 16 8k;
+    # gzip_http_version 1.1;
+    # gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
+    ##
+    # nginx-naxsi config
+    ##
+    # Uncomment it if you installed nginx-naxsi
+    ##
+
+    #include /etc/nginx/naxsi_core.rules;
+
+    ##
+    # nginx-passenger config
+    ##
+    # Uncomment it if you installed nginx-passenger
+    ##
+
+    #passenger_root /usr;
+    #passenger_ruby /usr/bin/ruby;
+
+    ##
+    # Virtual Host Configs
+    ##
+
+    include /etc/nginx/conf.d/*.conf;
+    include /etc/nginx/sites-enabled/*;
+</code></pre>
+
+<p>}
+</code></pre>
+The file is quite long, but that&rsquo;s because it contains a lot of examples (commented out).
+What we learn here is that:</p>
+
+<ul>
+<li>sites will run under a specific user named : www-data. That will be important when configuring permissions.</li>
+<li>there are access and error logs in /var/log/nginx/access.log en error.log. It&rsquo;s great that we can find all loggings in a central place /var/log/&hellip;</li>
+<li>right now, the most important lines in this config file are at the end of the http block: <pre><code class="language-bash">       include /etc/nginx/conf.d/<em>.conf;
+    include /etc/nginx/sites-enabled/</em>;
+</code></pre><br /></li>
+</ul>
+
+<p>The meaning of the include statements is quite obvious: all config files in these 2 folders will be incorporated in the master config file. That gives a very simple and elegant way to configure a whole server. So far, I don&rsquo;t see only a need for using the sites-enabled folder. But you need to use it in combination with the sites-available folder on the same level as the sites-enabled folder.</p>
+
+<p>##What&rsquo;s the difference between the folder sites-enabled and sites-available?</p>
+
+<p>When you do:
+<pre><code class="language-bash">ls /etc/nginx
+</code></pre>
+you will notice there is also a sites-available folder.</p>
+
+<p>The whole idea of these folders is to be able</p>
+
+<ul>
+<li>to make a configuration of a site but not activate it yet or;</li>
+<li>to temporary disable a site.</li>
+</ul>
+
+<p>How does this work?  Type:
+<pre><code class="language-bash">ls /etc/nginx/sites-available/ -al/nginx
+</code></pre></p>
+
+<pre style="background-color:lightgrey"><code>
+total 12
+drwxr-xr-x 2 root root 4096 Jan 15 09:24 .
+drwxr-xr-x 5 root root 4096 Jan 15 09:24 ..
+-rw-r--r-- 1 root root 2617 Oct 22 12:27 default
+</code></pre>
+
+<p>Nothing special so far, the folder contains a regular file called default, our default config file.</p>
+
+<p>Do now the same for the sites-enabled folder:
+<pre><code class="language-bash">ls /etc/nginx/sites-enabled/ -al
+</code></pre></p>
+
+<pre style="background-color:lightgrey"><code >
+total 8
+drwxr-xr-x 2 root root 4096 Jan 15 09:24 .
+drwxr-xr-x 5 root root 4096 Jan 15 09:24 ..
+lrwxrwxrwx 1 root root   34 Jan 15 09:24 default -> /etc/nginx/sites-available/default
+
+</code></pre>
+
+<p>You can see that the default file has here a special &lsquo;l&rsquo; attribute, which stand for link. This file is a symbolic link to the path indicated at the end of the line. In windows terminology: it&rsquo;s a shortcut !
+So, the whole idea is that the folder sites-available contains the real files and a link inside the sites-enabled folder is constructed via following command:
+<pre><code class="language-bash">
+ln -s /etc/nginx/sites-available/example.com.conf /etc/nginx/sites-enabled/example.com.conf
+</code></pre></p>
+
+<p>##Conclusion
+In my humble opinion: simple and straight-forward.
+In a next episode, we&rsquo;ll see how to create static sites in sub domains and sub folders.</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "opinionatedapps" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-dark-green bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://blog.opinionatedapps.com/" >
+    &copy; 2018 Opinionatedapps blog
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

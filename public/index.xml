@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Opinionatedapps blog</title>
+    <link>http://blog.opinionatedapps.com/</link>
+    <description>Recent content on Opinionatedapps blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Mon, 05 Nov 2018 12:20:48 +0000</lastBuildDate>
+    
+	<atom:link href="http://blog.opinionatedapps.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>A pure client side minimal elastic search solution with VueJs/Quasar</title>
+      <link>http://blog.opinionatedapps.com/posts/a-pure-client-side-elastic-search-solution-with-vuejs/</link>
+      <pubDate>Mon, 05 Nov 2018 12:20:48 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/a-pure-client-side-elastic-search-solution-with-vuejs/</guid>
+      <description>introduction Although seriously simplified thanks to docker, setting up elastic search is a tedious task and requires quite a lot of plumbing in order to integrate it with a single page application.
+An example of a such an elastic search can be found here: elastic search sample
+Under a specific set of conditions, elastic search functionality can be provided in a much simpler way, purely client side, in the browser.</description>
+    </item>
+    
+    <item>
+      <title>Get a CLI inside an aurelia SPA in minutes with aurelia-app-cli</title>
+      <link>http://blog.opinionatedapps.com/posts/aurelia-app-cli-in-minutes/</link>
+      <pubDate>Mon, 03 Oct 2016 12:20:48 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/aurelia-app-cli-in-minutes/</guid>
+      <description>introduction There is a big revival of Command Line Interfaces (CLI). Windows 10 has today an ubuntu bash shell on board, many application development frameworks promote their own CLI.
+Also inside a single page application (a SPA), a CLI can be very useful. In this post we we look into the functionality of the aurelia-app-cli plugin. In a later post I&amp;rsquo;ll dive deeper into the internals of the plugin.</description>
+    </item>
+    
+    <item>
+      <title>My favorite software development &#39;principles&#39;</title>
+      <link>http://blog.opinionatedapps.com/posts/my-favorite-software-development-principles/</link>
+      <pubDate>Thu, 23 Jun 2016 18:07:37 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/my-favorite-software-development-principles/</guid>
+      <description>Introduction Today I felt the need to write down some &amp;lsquo;principles&amp;rsquo; based on my experiences in software development of the last years. It&amp;rsquo;s by no means a full list, so I&amp;rsquo;ll try to update this post regularly when progressive insight pops up. I separated 3 categories: Coding, requirement gathering and agile methodology.
+Coding Code readability Code is read more often than it is written. Therefor, write only readable code. Readable code is not code that demonstrates how smart you are but code written with the genuine intention to be understood by others.</description>
+    </item>
+    
+    <item>
+      <title>On the exceptional nature of .Net Exceptions</title>
+      <link>http://blog.opinionatedapps.com/posts/on-the-exceptional-nature-of-net-exceptions/</link>
+      <pubDate>Mon, 20 Jun 2016 15:48:27 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/on-the-exceptional-nature-of-net-exceptions/</guid>
+      <description>Exceptions are meant for exceptional circumstances. Non thoughtful usage of exceptions is as evil as using global variables and goto statements.
+Basically an exception is an instrument meant for programmers in the sense that a programmer can use it to inform another programmer (or herself) that &amp;lsquo;a bug is in the air&amp;rsquo;. An exception is not something to be used to inform a user of your software about a certain (failing) condition.</description>
+    </item>
+    
+    <item>
+      <title>Making a decent recording with a digital piano without expensive equipment</title>
+      <link>http://blog.opinionatedapps.com/posts/making-a-decent-recording-with-a-digital-piano-without-expensive-equipment/</link>
+      <pubDate>Mon, 30 May 2016 07:00:57 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/making-a-decent-recording-with-a-digital-piano-without-expensive-equipment/</guid>
+      <description>##Introduction I can play the piano but I&amp;rsquo;m not a sound engineer. Because of that, I never invested in decent sound recording equipment (microphones and stuff). Because I don&amp;rsquo;t own decent recording equipment I will never learn how to make a decent recording and become a sound engineer. it&amp;rsquo;s clear, I love playing piano, but I&amp;rsquo;m not interested in the technical details of making recordings. Recently, I elaborated a very pragmatic and simple process to make a decent recording with a fairly recent digital piano without the need for technical recording equipment.</description>
+    </item>
+    
+    <item>
+      <title>Does aurelia-auth support webpack?</title>
+      <link>http://blog.opinionatedapps.com/posts/does-aurelia-auth-support-webpack/</link>
+      <pubDate>Fri, 25 Mar 2016 06:51:30 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/does-aurelia-auth-support-webpack/</guid>
+      <description>##Introduction Yes is does. ##why webpack? I like the simplicity of webpack and it seems to load faster than jspm. Webpack doesn&amp;rsquo;t rely on jspm, nor for the package management, nor for the module loading. ##aurelia-auth on npm is called aurelia-auth.
+https://www.npmjs.com/package/aurelia-auth
+##how to use it? I&amp;rsquo;m using webpack already in my &amp;ldquo;asp.net core - aurelia - identity server - docker&amp;rdquo; sample on github.
+Jump in the sources and it will become cristal clear: https://github.</description>
+    </item>
+    
+    <item>
+      <title>How does aurelia-auth support multiple endpoints?</title>
+      <link>http://blog.opinionatedapps.com/posts/how-does-aurelia-auth-support-multiple-endpoints/</link>
+      <pubDate>Fri, 25 Mar 2016 06:40:02 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/how-does-aurelia-auth-support-multiple-endpoints/</guid>
+      <description>##Introduction I sometimes get the question if aurelia-auth does support multiple endpoints. Sometimes more degrees of freedom are required when it comes to http configuration. My solution for this, is &amp;lsquo;close to the metal&amp;rsquo; but promises 100% degrees of freedom.
+Let&amp;rsquo;s demistify things. Watch carefully !
+##How does aurelia-auth augment the Http Client?
+Well, it&amp;rsquo;s import to have a clear understanding how exactly the default Http Client is augemented by aurelia-auth and that we have the full freedom to use your own custom logic as well.</description>
+    </item>
+    
+    <item>
+      <title>Support for Fetch client in the aurelia-auth plugin</title>
+      <link>http://blog.opinionatedapps.com/posts/support-for-fetch-client-in-the-aurelia-auth-plugin/</link>
+      <pubDate>Thu, 29 Oct 2015 09:03:37 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/support-for-fetch-client-in-the-aurelia-auth-plugin/</guid>
+      <description>Introduction In aurelia, there are currently two options for http backend communication: aurelia-fetch-client and aurelia-http-client. The preferred option is to use the Fetch client since is based on a real standard.
+In the aurelia-auth plugin, some kind of http configuration needs to be done, namely the injection of the JWT token in each &amp;lsquo;authenticated&amp;rsquo; request. By doing so, you don&amp;rsquo;t need to worry about this when sending a particular http request to your backend, the aurelia-auth plugin will automatically take the JWT token from the browser storage and add it to the http request message.</description>
+    </item>
+    
+    <item>
+      <title>Using sqlite3 inside an aspnet5 docker image as web api persistence store.</title>
+      <link>http://blog.opinionatedapps.com/posts/using-sqlite3-inside-an-aspnet5-docker-image-as-web-api-persistence-store/</link>
+      <pubDate>Fri, 11 Sep 2015 07:24:39 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/using-sqlite3-inside-an-aspnet5-docker-image-as-web-api-persistence-store/</guid>
+      <description>introduction In my previous post I used an in memory database as &amp;ldquo;persistence&amp;rdquo; for the web api service. That&amp;rsquo;s of course not a viable option. In this article I&amp;rsquo;ll explain how you can update the aspnet docker image in such a way you can use sqlite3. But let&amp;rsquo;s first check why you would want to use sqlite?
+why sqlite? For occasion you don&amp;rsquo;t want or need a full sql server.</description>
+    </item>
+    
+    <item>
+      <title>Running a asp.net 5 web api side by side on windows and linux</title>
+      <link>http://blog.opinionatedapps.com/posts/running-a-asp-net-5-web-api-side-by-side-on-windows-and-linux/</link>
+      <pubDate>Thu, 10 Sep 2015 14:46:30 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/running-a-asp-net-5-web-api-side-by-side-on-windows-and-linux/</guid>
+      <description>Introduction In a previous series of two articles I described a sample web api making use of Owin and deployed everything on linux inside a docker instance. Microsoft is doing a great effort in bringing .Net to the next level by allowing to run .Net on the 3 major OS platforms. What is new in this post compared to the original articles mentioned above is the fact that today we can make make use of 3 new tools: DNVM, DNX and DNU to give cross platform deployment a better experience.</description>
+    </item>
+    
+    <item>
+      <title>an uber simple gulp typescript workflow for Aurelia</title>
+      <link>http://blog.opinionatedapps.com/posts/an-uber-simple-gulp-typescript-workflow-for-aurelia/</link>
+      <pubDate>Tue, 11 Aug 2015 15:51:30 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/an-uber-simple-gulp-typescript-workflow-for-aurelia/</guid>
+      <description>Introduction In the previous article we saw how we could let the browser do the typescript compilation. I had today a very interesting chat with Louis Lewis and he provided me the missing pieces for transforming the skeleton-navigation app with a minimal effort to a full blown typescript app while preserving the systemJs module syntax.
+show me the code Here we go.
+the gulp-typescript compile task the most important difference is of course is kicking out babel as transpiler and using typescript instead:</description>
+    </item>
+    
+    <item>
+      <title>A lean aurelia typescript development experience</title>
+      <link>http://blog.opinionatedapps.com/posts/a-lean-aurelia-typescript-deveopment-experience/</link>
+      <pubDate>Sat, 08 Aug 2015 10:59:54 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/a-lean-aurelia-typescript-deveopment-experience/</guid>
+      <description>##Introduction I have seen many attempts to introduce typescript into the aurelia development pipeline. Usually, what they have in common, is that they are are all quite involved and complex. I tried to work the other way around, based on the new jspm beta, and I&amp;rsquo;m proposing here an extremely simplified setup for working with typescript in aurelia. Note that I&amp;rsquo;m only focussing on a development experience. Hopefully, this example is interesting enough to trigger a discussion towards a better aurelia typescript experience.</description>
+    </item>
+    
+    <item>
+      <title>Build a minimalist fullstack CRM app in 5 minutes with aurelia and loopback</title>
+      <link>http://blog.opinionatedapps.com/posts/build-a-minimalist-crm-app-in-5-minutes-with-aurelia-and-loopback/</link>
+      <pubDate>Sat, 01 Aug 2015 12:18:08 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/build-a-minimalist-crm-app-in-5-minutes-with-aurelia-and-loopback/</guid>
+      <description>Introduction Obviously, CRM apps aren&amp;rsquo;t built in 5 minutes. Luckily, the idea of this article is not to show you how to build a CRM application and our sample really hasn&amp;rsquo;t anything at all to do with a Crm app. What I want to show in this article, is that setting up everyting you need for building a full stack application ready to be enriched with any line of business scenario can be effectively done in 5 minutes.</description>
+    </item>
+    
+    <item>
+      <title>Aureliauth, a token based authentication plugin for Aurelia</title>
+      <link>http://blog.opinionatedapps.com/posts/aureliauth-a-token-based-authentication-plugin-for-aurelia/</link>
+      <pubDate>Mon, 06 Jul 2015 07:28:23 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/aureliauth-a-token-based-authentication-plugin-for-aurelia/</guid>
+      <description>What is Aureliauth Aureliauth is a token-based authentication plugin for Aurelia with support for popular social authentication providers (Google, Twitter, Facebook, LinkedIn, Windows Live, FourSquare, Yahoo, Github ) and a local stragegy, i.e. simple username (email) and password.
+Aureliauth is a port of the great Sattelizer library to ES6 and packaged as an Aurelia plugin.
+Other OAuth1 and Oauth2 than the above mentioned providers can be simply added by editing the extensible configuration file.</description>
+    </item>
+    
+    <item>
+      <title>Gulp adventures (part 2/n)</title>
+      <link>http://blog.opinionatedapps.com/posts/gulp-adventures-part-2/</link>
+      <pubDate>Thu, 12 Mar 2015 12:47:55 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/gulp-adventures-part-2/</guid>
+      <description>Project structure Take a look at following project structure: There is the client and server folder in the root. Some developers surround these with a additional src folder. I don&amp;rsquo;t see any direct benefit in doing that. Another observation is that the bower_components are stored under client/app. The reason is that bower components are really tied to the client, they are never used from the server project. This in contrast with the npm modules, which are used both by the server as well as the client.</description>
+    </item>
+    
+    <item>
+      <title>Gulp adventures (part 1/n)</title>
+      <link>http://blog.opinionatedapps.com/posts/gulp-adventures-part-1/</link>
+      <pubDate>Thu, 12 Mar 2015 10:07:32 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/gulp-adventures-part-1/</guid>
+      <description>##Introduction I&amp;rsquo;m learning Gulp and sharing here my progressive insights. I&amp;rsquo;m a big fan of a decent continuous integration approach and to foresee as much automation as possible in your application development workflow. All that makes that your can put on your thinking caps for the right purposes, namely thinking about the software your are building. Furthermore an approach of &amp;ldquo;Deploy early and deploy often&amp;rdquo; will enhance the relationship with your stakeholders.</description>
+    </item>
+    
+    <item>
+      <title>Using mongodb with automatic fail-over in a loopback nodeJs application</title>
+      <link>http://blog.opinionatedapps.com/posts/using-mongodb-with-automatic-fail-over/</link>
+      <pubDate>Sun, 08 Mar 2015 11:06:21 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/using-mongodb-with-automatic-fail-over/</guid>
+      <description>##Introduction In this article I&amp;rsquo;ll explain how easy it is to configure automatic fail-over when using MongoDb as database server. I&amp;rsquo;ll present things in such a way you can easily do this yourself on a windows machine. ##What is fail-over? Data and the especially the availability of data is crucial for an application. So, it makes a lot of sense to ensure that in case your database server goes down, the whole data handling is automatically taken over by another server.</description>
+    </item>
+    
+    <item>
+      <title>WebApi AspNet.Vnext Mono with Entity Framework via docker on Ubuntu Linux (part 2/n)</title>
+      <link>http://blog.opinionatedapps.com/posts/webapi-aspnet-vnext-mono-via-docker-on-ubuntu-linux-part-2/</link>
+      <pubDate>Wed, 25 Feb 2015 08:01:08 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/webapi-aspnet-vnext-mono-via-docker-on-ubuntu-linux-part-2/</guid>
+      <description>##Introduction In this article, we&amp;rsquo;ll start from a fresh Ubuntu server and get a .Net web api up and running. All this can be covered in this very post. We&amp;rsquo;ll use the source code from the previous post stored on github over here.
+##Step 1: Provision an ubuntu server This is very easy and covered everywhere on the net. I&amp;rsquo;ll use a virtual machine on my local windows 8 laptop using Hyper-V, but you can create an instance on azure, DigitalOcean, you name it.</description>
+    </item>
+    
+    <item>
+      <title>WebApi AspNet.Vnext Mono with Entity Framework via docker on Ubuntu Linux (part 1/n)</title>
+      <link>http://blog.opinionatedapps.com/posts/webapi-aspnet-vnext-mono-via-docker-on-ubuntu-linux-part-1/</link>
+      <pubDate>Tue, 24 Feb 2015 14:08:40 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/webapi-aspnet-vnext-mono-via-docker-on-ubuntu-linux-part-1/</guid>
+      <description>Introduction I have been working lately quite insensively in the Linux world. Time again for some .Net. Let&amp;rsquo;s see what happened in the mean time with AspNet Vnext and let&amp;rsquo;s explore a Katana based web api. But we will not completely leave the Linux world. We&amp;rsquo;ll use Mono and run the web api on an ubuntu server and use Docker. We&amp;rsquo;ll connect the web api to a database backend via Entity Framework 6.</description>
+    </item>
+    
+    <item>
+      <title>Running a NodeJs app on nginx (2/2)</title>
+      <link>http://blog.opinionatedapps.com/posts/running-a-nodejs-app-on-nginx-part-2/</link>
+      <pubDate>Thu, 22 Jan 2015 21:33:07 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/running-a-nodejs-app-on-nginx-part-2/</guid>
+      <description>##Introduction In the first episode, we did setup nginx for hosting a nodeJs app and applied an additional rewrite rule. In this post we&amp;rsquo;ll provide some additional rebustness. What we are missing, is a kind of process which monitors our app and which assures that the app stays up and running. Furthermore the process should also make sure that the app is started when the machine reboots. So, you could call this process manager a kind of supervisor and indeed, that&amp;rsquo;s what we need: supervisor.</description>
+    </item>
+    
+    <item>
+      <title>Running a NodeJs app on nginx (1/2)</title>
+      <link>http://blog.opinionatedapps.com/posts/running-a-nodejs-app-on-nginx-part-1/</link>
+      <pubDate>Tue, 20 Jan 2015 15:12:11 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/running-a-nodejs-app-on-nginx-part-1/</guid>
+      <description>##Introduction In the previous post we did setup a nginx web server for serving static pages. In this post, we will host a NodeJs application and make sure it will survice application crashes.
+##The sample NodeJs application We&amp;rsquo;ll focus on how nginx handles NodeJs, so we just need a dummy app but we want that the app logs both normal and failure behavior. So, let&amp;rsquo;s create a NodeJs application under /usr/share/nginx/app1.</description>
+    </item>
+    
+    <item>
+      <title>Adopting a lean web app server infrastructure based on nginx (part 3/3)</title>
+      <link>http://blog.opinionatedapps.com/posts/adopting-a-lean-web-app-server-infrastructure-based-on-nginx-part-3/</link>
+      <pubDate>Thu, 15 Jan 2015 19:58:06 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/adopting-a-lean-web-app-server-infrastructure-based-on-nginx-part-3/</guid>
+      <description>##Introduction In this post, we&amp;rsquo;ll create two types of static sites:
+ in a sub domain : e.g. demosite1.opinionatedapps.com in a sub folder: e.g. demosite1.opinionatedapps.com/sub1 ##Create a static site in a sub domain First let&amp;rsquo;s go to our DNS (in my case NameCheap.com) and add a new sub domain called &amp;lsquo;demosite1&amp;rsquo;:   Let&amp;rsquo;s create a config file for this sub domain site in /etc/nginx/sites-available: nano /etc/nginx/sites-available/demosite1.opinionatedapps.com server { listen 80; server_name demosite1.</description>
+    </item>
+    
+    <item>
+      <title>Adopting a lean web app server infrastructure based on nginx (part 2/3)</title>
+      <link>http://blog.opinionatedapps.com/posts/adopting-a-lean-web-app-server-infrastructure-based-on-nginx-part-2/</link>
+      <pubDate>Thu, 15 Jan 2015 14:38:18 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/adopting-a-lean-web-app-server-infrastructure-based-on-nginx-part-2/</guid>
+      <description>##Enjoy the mechanical sympathy of nginx? For me, the most important aspect for selecting nginx (pronounce Engine-X) is the fact that it basically uses an event-driven architecture for handling request in an asynchronous matter, much like nodeJs is working. In other words, it doesn&amp;rsquo;t rely on threads to handle requests. Since we&amp;rsquo;ll jump soon on the nodeJs bandwagon, you&amp;rsquo;ll start to like this type of mechanical sympathy. All this makes nginx very lightweight and super fast.</description>
+    </item>
+    
+    <item>
+      <title>Adopting a lean web app server infrastructure based on nginx (part 1/3)</title>
+      <link>http://blog.opinionatedapps.com/posts/adopting-a-lean-web-app-server-infrastructure-part-1/</link>
+      <pubDate>Thu, 15 Jan 2015 12:13:48 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/adopting-a-lean-web-app-server-infrastructure-part-1/</guid>
+      <description>##Introduction Modern web applications build with isomorphic JavaScript frameworks (JavaScript both on client and server) can be easily deployed to web servers other than Microsoft&amp;rsquo;s IIS. In fact, there are ways to run NodeJs on IIS but, without going here too deep into technical details, that really feels for me like a very strange marriage. But wait, even when you want to stick to a .Net based application, you can use nowadays Linux instead of a Windows server.</description>
+    </item>
+    
+    <item>
+      <title>About</title>
+      <link>http://blog.opinionatedapps.com/posts/about/</link>
+      <pubDate>Mon, 12 Jan 2015 13:59:53 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/about/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>contact</title>
+      <link>http://blog.opinionatedapps.com/posts/contact/</link>
+      <pubDate>Mon, 12 Jan 2015 13:59:36 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/contact/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Proud to present my new blog</title>
+      <link>http://blog.opinionatedapps.com/posts/welcome-to-my-new-blog/</link>
+      <pubDate>Fri, 09 Jan 2015 18:11:09 +0000</pubDate>
+      
+      <guid>http://blog.opinionatedapps.com/posts/welcome-to-my-new-blog/</guid>
+      <description>Why a new blog? Well, the layout of my previous blog was ready for some revision. Apart from that, thought it was, for various reasons, just time for a fresh new start.
+Why a new blogging platform? Indeed, you might have noticed that I moved from WordPress to Ghost. I hope you like the layout. The main reason is not that WordPress is bad, but it&amp;rsquo;s more that I don&amp;rsquo;t want to invest in learning php, for which I feel kind of natural aversion and which I would need for fine-tuning the theme or building my own.</description>
+    </item>
+    
+  </channel>
+</rss>
