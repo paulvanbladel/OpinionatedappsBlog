@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Opinionatedapps blog  | Running a asp.net 5 web api side by side on windows and linux</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.30.2" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Running a asp.net 5 web api side by side on windows and linux" />
+<meta property="og:description" content="Introduction In a previous series of two articles I described a sample web api making use of Owin and deployed everything on linux inside a docker instance. Microsoft is doing a great effort in bringing .Net to the next level by allowing to run .Net on the 3 major OS platforms. What is new in this post compared to the original articles mentioned above is the fact that today we can make make use of 3 new tools: DNVM, DNX and DNU to give cross platform deployment a better experience." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.opinionatedapps.com/posts/running-a-asp-net-5-web-api-side-by-side-on-windows-and-linux/" />
+
+
+
+<meta property="article:published_time" content="2015-09-10T14:46:30&#43;00:00"/>
+
+<meta property="article:modified_time" content="2015-09-10T14:46:30&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Running a asp.net 5 web api side by side on windows and linux">
+<meta itemprop="description" content="Introduction In a previous series of two articles I described a sample web api making use of Owin and deployed everything on linux inside a docker instance. Microsoft is doing a great effort in bringing .Net to the next level by allowing to run .Net on the 3 major OS platforms. What is new in this post compared to the original articles mentioned above is the fact that today we can make make use of 3 new tools: DNVM, DNX and DNU to give cross platform deployment a better experience.">
+
+
+<meta itemprop="datePublished" content="2015-09-10T14:46:30&#43;00:00" />
+<meta itemprop="dateModified" content="2015-09-10T14:46:30&#43;00:00" />
+<meta itemprop="wordCount" content="434">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Running a asp.net 5 web api side by side on windows and linux"/>
+<meta name="twitter:description" content="Introduction In a previous series of two articles I described a sample web api making use of Owin and deployed everything on linux inside a docker instance. Microsoft is doing a great effort in bringing .Net to the next level by allowing to run .Net on the 3 major OS platforms. What is new in this post compared to the original articles mentioned above is the fact that today we can make make use of 3 new tools: DNVM, DNX and DNU to give cross platform deployment a better experience."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-dark-green">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://blog.opinionatedapps.com/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Opinionatedapps blog
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Running a asp.net 5 web api side by side on windows and linux</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2015-09-10T14:46:30Z">September 10, 2015</time>      
+      
+      
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<h2 id="introduction">Introduction</h2>
+
+<p>In a <a href="http://blog.opinionatedapps.com/webapi-aspnet-vnext-mono-via-docker-on-ubuntu-linux-part-1/">previous series of two articles</a> I described a sample web api making use of Owin and deployed everything on linux inside a docker instance.
+Microsoft is doing a great effort in bringing .Net to the next level by allowing to run .Net on the 3 major OS platforms.
+What is new in this post compared to the original articles mentioned above is the fact that today we can make make use of 3 new tools: DNVM, DNX and DNU to give cross platform deployment a better experience.</p>
+
+<h2 id="the-dnvm-dnx-and-dnu">The DNVM, DNX and DNU</h2>
+
+<p>In case the .Net Version Manager, the .Net Execution Environment and the .Net Development Utilities are new to use, read following excellent<a href="http://www.codeproject.com/Articles/1005145/DNVM-DNX-and-DNU-Understanding-the-ASP-NET-Runtime"> codeproject article.</a></p>
+
+<p>The good news is that all these new tools run both on windows, linux and IOS.</p>
+
+<h2 id="get-the-sample-project-from-github">Get the sample project from Github</h2>
+
+<p>You can find <a href="https://github.com/paulvanbladel/AspNet5-Web-Api-Sample">here</a> the sources and enjoy the new lean solution structure of asp.net version 5. Yeah, ultimately things are getting better in the Microsoft development world&hellip;
+The details of the new AspNet 5 can be found elsewhere on the net</p>
+
+<h2 id="the-revival-of-the-command-line">The revival of the command line</h2>
+
+<p>Inside  project.json wen can define now &lsquo;commands&rsquo; that we need during development or deployment:</p>
+
+<pre><code class="language-language-bash">  &quot;commands&quot;: {
+    &quot;web&quot;: &quot;Microsoft.AspNet.Hosting --config hosting.ini&quot;,
+    &quot;ef&quot;: &quot;EntityFramework.Commands&quot;,
+    &quot;Kestrel&quot;: &quot;Microsoft.AspNet.Hosting --server Microsoft.AspNet.Server.Kestrel --server.urls http://localhost:5000&quot;
+  }
+</code></pre>
+
+<p>for example the ef (Entity Framework) tool will allow us to do the well known code-first database migrations:</p>
+
+<pre><code class="language-language-bash">dnx ef migrations add MyFirstMigration
+</code></pre>
+
+<h2 id="bootstrapping-on-windows">Bootstrapping on Windows</h2>
+
+<p>Obviously, when using visual studio as development environment, the simplest way to start your project is using IIS Express:</p>
+
+<p><img src="/content/images/2015/09/IisExpress.png" alt="" /></p>
+
+<p>When running outside visual studio, you can start now as well via:</p>
+
+<pre><code class="language-language-bash">dnx web
+</code></pre>
+
+<p>which will kick-off your project in self-hosted mode.</p>
+
+<h2 id="bootstrapping-on-linux">Bootstrapping on Linux</h2>
+
+<p>On windows we have DNVM, DNX and DNU available since we installed visual studio. Obviously, you can install them separately (that&rsquo;s what you would typically do on a production server) and that&rsquo;s what we need to do also on linux.
+The most simple approach is to use docker in such a way we have a full pre-fab AspNet 5 environment:</p>
+
+<pre><code class="language-language-bash">sudo docker run -it -p 5000:5000 microsoft/aspnet /bin/bash 
+</code></pre>
+
+<p>Inside the container, do a git clone of the</p>
+
+<pre><code class="language-language-bash">dnx Kestrel
+</code></pre>
+
+<h2 id="conclustion">Conclustion</h2>
+
+<p>I love it !
+Currently, I&rsquo;m using in the sample the EntityFramework In Memory database provider. I&rsquo;m pretty sure there will be exquisite support for SqlServer but trying the sqlite provider was without success.
+I hope one day I will combine both .Net and NodeJs apps on my favorite server environment Linux and simply chose between .Net or Node depending of typical needs and the required functionality.</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "opinionatedapps" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-dark-green bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://blog.opinionatedapps.com/" >
+    &copy; 2019 Opinionatedapps blog
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

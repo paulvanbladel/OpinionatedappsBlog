@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Opinionatedapps blog  | Aureliauth, a token based authentication plugin for Aurelia</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.30.2" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Aureliauth, a token based authentication plugin for Aurelia" />
+<meta property="og:description" content="What is Aureliauth Aureliauth is a token-based authentication plugin for Aurelia with support for popular social authentication providers (Google, Twitter, Facebook, LinkedIn, Windows Live, FourSquare, Yahoo, Github ) and a local stragegy, i.e. simple username (email) and password.
+Aureliauth is a port of the great Sattelizer library to ES6 and packaged as an Aurelia plugin.
+Other OAuth1 and Oauth2 than the above mentioned providers can be simply added by editing the extensible configuration file." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.opinionatedapps.com/posts/aureliauth-a-token-based-authentication-plugin-for-aurelia/" />
+
+
+
+<meta property="article:published_time" content="2015-07-06T07:28:23&#43;00:00"/>
+
+<meta property="article:modified_time" content="2015-07-06T07:28:23&#43;00:00"/>
+
+
+
+
+
+
+
+
+
+
+
+<meta itemprop="name" content="Aureliauth, a token based authentication plugin for Aurelia">
+<meta itemprop="description" content="What is Aureliauth Aureliauth is a token-based authentication plugin for Aurelia with support for popular social authentication providers (Google, Twitter, Facebook, LinkedIn, Windows Live, FourSquare, Yahoo, Github ) and a local stragegy, i.e. simple username (email) and password.
+Aureliauth is a port of the great Sattelizer library to ES6 and packaged as an Aurelia plugin.
+Other OAuth1 and Oauth2 than the above mentioned providers can be simply added by editing the extensible configuration file.">
+
+
+<meta itemprop="datePublished" content="2015-07-06T07:28:23&#43;00:00" />
+<meta itemprop="dateModified" content="2015-07-06T07:28:23&#43;00:00" />
+<meta itemprop="wordCount" content="173">
+
+
+
+<meta itemprop="keywords" content="" />
+<meta name="twitter:card" content="summary"/><meta name="twitter:title" content="Aureliauth, a token based authentication plugin for Aurelia"/>
+<meta name="twitter:description" content="What is Aureliauth Aureliauth is a token-based authentication plugin for Aurelia with support for popular social authentication providers (Google, Twitter, Facebook, LinkedIn, Windows Live, FourSquare, Yahoo, Github ) and a local stragegy, i.e. simple username (email) and password.
+Aureliauth is a port of the great Sattelizer library to ES6 and packaged as an Aurelia plugin.
+Other OAuth1 and Oauth2 than the above mentioned providers can be simply added by editing the extensible configuration file."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-dark-green">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://blog.opinionatedapps.com/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Opinionatedapps blog
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Aureliauth, a token based authentication plugin for Aurelia</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2015-07-06T07:28:23Z">July 6, 2015</time>      
+      
+      
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l">
+
+<h2 id="what-is-aureliauth">What is Aureliauth</h2>
+
+<p>Aureliauth is a token-based authentication plugin for <a href="http://aurelia.io/">Aurelia</a> with support for popular social authentication providers (Google, Twitter, Facebook, LinkedIn, Windows Live, FourSquare, Yahoo, Github ) and a local stragegy, i.e. simple username (email) and password.</p>
+
+<p>Aureliauth is a port of the great <a href="https://github.com/sahat/satellizer/">Sattelizer</a> library to ES6 and packaged as an Aurelia plugin.</p>
+
+<p>Other OAuth1 and Oauth2 than the above mentioned providers can be simply added by editing the extensible configuration file.</p>
+
+<p>Basically, Aureliauth does not use any cookies but relies on a JWT (Json web token) stored in the local storage of the browser:
+<img src="/content/images/2015/07/TokenViaDevelopmentTools.png" alt="JWT in local storage" /></p>
+
+<p>Both <strong>local storage</strong> as well as <strong>session storage</strong> can be used (via the Aureliauth security configuration file).</p>
+
+<p>The aurelia token will be sent automatically to your API when the user is authenticated.</p>
+
+<p><img src="/content/images/2015/07/authHeader.png" alt="" /></p>
+
+<h2 id="where-can-i-find-more-details-and-a-sample-app">Where can I find more details and a sample app?</h2>
+
+<p>The sources are on my <a href="https://github.com/paulvanbladel/aureliauth">github</a> space.</p>
+
+<p>There is also a sample app: <a href="http://aureliauth.opinionatedapps.com">aureliauth.opinionatedapps.com</a></p>
+
+<p>The sources of the sample app are also available on <a href="https://github.com/paulvanbladel/aureliauth-sample">github</a></p>
+
+<p>The README contains a lot more information.
+Enjoy !</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "opinionatedapps" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-dark-green bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://blog.opinionatedapps.com/" >
+    &copy; 2019 Opinionatedapps blog
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>
