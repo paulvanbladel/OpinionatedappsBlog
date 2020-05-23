@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Opinionatedapps blog  | Build a minimalist fullstack CRM app in 5 minutes with aurelia and loopback</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.71.0" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Build a minimalist fullstack CRM app in 5 minutes with aurelia and loopback" />
+<meta property="og:description" content="Introduction Obviously, CRM apps aren&rsquo;t built in 5 minutes. Luckily, the idea of this article is not to show you how to build a CRM application and our sample really hasn&rsquo;t anything at all to do with a Crm app. What I want to show in this article, is that setting up everyting you need for building a full stack application ready to be enriched with any line of business scenario can be effectively done in 5 minutes." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.opinionatedapps.com/posts/build-a-minimalist-crm-app-in-5-minutes-with-aurelia-and-loopback/" />
+<meta property="article:published_time" content="2015-08-01T12:18:08+00:00" />
+<meta property="article:modified_time" content="2015-08-01T12:18:08+00:00" />
+<meta itemprop="name" content="Build a minimalist fullstack CRM app in 5 minutes with aurelia and loopback">
+<meta itemprop="description" content="Introduction Obviously, CRM apps aren&rsquo;t built in 5 minutes. Luckily, the idea of this article is not to show you how to build a CRM application and our sample really hasn&rsquo;t anything at all to do with a Crm app. What I want to show in this article, is that setting up everyting you need for building a full stack application ready to be enriched with any line of business scenario can be effectively done in 5 minutes.">
+<meta itemprop="datePublished" content="2015-08-01T12:18:08&#43;00:00" />
+<meta itemprop="dateModified" content="2015-08-01T12:18:08&#43;00:00" />
+<meta itemprop="wordCount" content="1538">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Build a minimalist fullstack CRM app in 5 minutes with aurelia and loopback"/>
+<meta name="twitter:description" content="Introduction Obviously, CRM apps aren&rsquo;t built in 5 minutes. Luckily, the idea of this article is not to show you how to build a CRM application and our sample really hasn&rsquo;t anything at all to do with a Crm app. What I want to show in this article, is that setting up everyting you need for building a full stack application ready to be enriched with any line of business scenario can be effectively done in 5 minutes."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-dark-green">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://blog.opinionatedapps.com/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Opinionatedapps blog
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Build a minimalist fullstack CRM app in 5 minutes with aurelia and loopback</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2015-08-01T12:18:08Z">August 1, 2015</time>      
+      
+      
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="introduction">Introduction</h2>
+<p>Obviously, CRM apps aren&rsquo;t built in 5 minutes. Luckily, the idea of this article is not to show you how to build a CRM application and our sample really hasn&rsquo;t anything at all to do with a Crm app.
+What I want to show in this article, is that setting up everyting you need for building a full stack application ready to be enriched with any line of business scenario can be effectively done in 5 minutes. 
+Nonetheless, here is a screen shot of our <strong>monty python full stack CRM</strong> app:
+<img src="/content/images/2015/08/crm.png" alt=""></p>
+<h2 id="which-development-tools-do-i-need">Which development tools do I need?</h2>
+<p>I&rsquo;m working on windows.
+All you need is a command prompt. Preferably a tool like <a href="http://gooseberrycreative.com/cmder/">Cmder</a> and a good text editor. I&rsquo;m using <a href="http://www.sublimetext.com/">sublime text</a>.
+You also need to NodeJs and Npm installed.</p>
+<h2 id="which-technology-are-we-envisioning">Which technology are we envisioning?</h2>
+<p>We want a full stack approach with one both sides of the wire javascript in such a way eventually (not in this article)  we will add isomorphic goodness.
+Client side we will use <a href="http://aurelia.io/">Aurelia</a>, the most promising single page application framework around.
+Server side we will use <a href="http://loopback.io/">Loopback</a>, one of the best ExpressJs based solution for REST Apis.
+We want to build this full stack application based on <a href="http://yeoman.io/">Yeoman</a>, the best scafolding tool in the world. This allows us to setup a base structure without too much file shuffling and furthermore the Yeoman tooling can further help us in extending the application with more business scenarios.
+There are Yeoman generators for both Aurelia and Loopback, but currently there is no integrated Yeoman approach. At least, not yet !</p>
+<h2 id="where-are-the-sources">Where are the sources?</h2>
+<p>In case you don&rsquo;t want to follow the next steps, you can directly download the sources of the app on <a href="https://github.com/paulvanbladel/aurelia-loopback-sample">github.com/paulvanbladel/aurelia-loopback-sample</a> and following the instructions in the readme file for kicking off the app.</p>
+<h2 id="how-will-we-proceed">How will we proceed?</h2>
+<p>Well, basically the whole process boils down to following steps.</p>
+<ul>
+<li>create the server side project (the Loopback NodeJs express app) with yeoman</li>
+<li>create the client side Aurelia SPA project (in a seperate folder apart from the server project)</li>
+<li>copy the aurelia app in the client folder of the server project</li>
+<li>do a small tweak on the Gulp webserver processing</li>
+<li>add a model (in our case a customer model) in the loopback app</li>
+<li>add a corresponding basic crud scenario in the aurelia app</li>
+<li>start the server and gulp watch the client and enjoy.</li>
+</ul>
+<h2 id="step-1--create-the-loopback-server-app-with-yeoman">Step 1 : create the loopback server app with Yeoman</h2>
+<p>Make sure you installed correctly the loopback tool. Following the instruction on the <a href="http://docs.strongloop.com/display/public/LB/Installing+StrongLoop">StrongLoop</a> web site.
+Baiscally, this boils down to :</p>
+<pre><code>npm install -g strongloop
+</code></pre><p>No need to install MongoDb, we will use an in memory database instead (with persistence in a simple text file). Obviously, for production purposes, you will want to use a decent database like MongoDb.
+Run now the Yeoman scaffolding tool for generating the app:</p>
+<pre><code>yo loopback
+</code></pre><p>Simply follow the instructions, take whatever name for the app.
+At the end, you will get following file structure:
+<img src="/content/images/2015/08/loopbackFileStructure.png" alt=""></p>
+<p>As a first smoke test, you can start the app:</p>
+<pre><code>node server/server.js
+</code></pre><p>You can even browse to the explorer middleware and do already some CRUD operations with the built-in User model. Consult the Strongloop <a href="http://docs.strongloop.com/display/public/LB/LoopBack">documentation</a> for more details. Anyhow, you will need these for fine-tuning your Rest Api and the server side business logic.</p>
+<h2 id="step-2-create-the-aurelia-spa">Step 2: create the Aurelia SPA.</h2>
+<p>This is the only part where you need to be careful. We will use here again yeoman for setting up the SPA&rsquo;s base structure, but it&rsquo;s important that we do this in a folder completely separate from the previous step. <strong>In the end, we will move the aurelia spa in the client folder of the loopback app, but we can not generate the application in this folder.</strong> This has to do with Yeoman trying to be smart. When, one day, an integrated Yeoman-loopback generator is available, this problem will be solved.
+So, e.g. create the aurelia spa in c:\temp\my-aurelia-app by running:</p>
+<pre><code>yo aurelia
+</code></pre><p>I presume here that you are familiar with aurelia, so test the app by running</p>
+<pre><code>gulp watch
+</code></pre><h2 id="step-3-merge-client-with-server">Step 3: merge client with server</h2>
+<p>The loopback app contains a folder client. That&rsquo;s the place where we need to copy the full sources of the aurelia app created in step 2.
+If you still didn&rsquo;t get it:
+<img src="/content/images/2015/08/file-integration-client-server.png" alt=""></p>
+<p>Windows users might run into the problem that copying paths contains node_modules with very longs paths gives trouble. My solution is to use <a href="http://www.7-zip.org/">Seven-Zip</a> for copying, moving or deleting folders running into that problem.</p>
+<p><strong>Now, although we merged files from client into server, there is still a perfect separation, the only design time integration we make is in the next step, were we slightly tweak the client side gulp processing specifically for the nodeJs server.</strong></p>
+<p><strong>All jspm and npm specific material related to the client is directly in the client folder !</strong></p>
+<p>If tomorrow you want to move this application to a .Net based backend, just copy the full client folder and move it to visual studio. It will work without any problem.
+Similarly, if you want to replace the Aurelia spa with another spa, drop it in the client folder and it will work, but probably not as good as aurelia though :)</p>
+<h2 id="step-4-tweak-the-gulp-web-server-processing">Step 4: tweak the gulp web server processing.</h2>
+<p>Basically, we have now a server application and a bunch of static files (the aurelia app).
+One option could be to let nodeJs (so the server app) serve these static files. That&rsquo;s an approach I do not like. NodeJs is an application framework, not a file server. Serving files is the task of a web server, which will do this much faster.
+So, the tweak in the gulp processing that we are envisioning here is to make sure that web server is serving all static files, but request to  https://localost/4000/Api/xyz are proxied to the NodeJs application.</p>
+<pre><code class="language-language-javascript" data-lang="language-javascript">var gulp = require('gulp');
+var browserSync = require('browser-sync');
+var proxy = require('proxy-middleware');
+var url = require('url');
+var paths = require('../paths');
+gulp.task('serve', ['build' ], function(done) {
+
+  var proxyOptionsAccessControl = function(req,res, next){
+        res.setHeader('Access-Control-Allow-Origin', '*');
+        next();
+  };
+  var proxyOptionsApiRoute = url.parse('http://localhost:' + paths.nodeJsPort +  '/api') ;
+  proxyOptionsApiRoute.route = '/api';
+
+  var proxyOptionsAuthRoute = url.parse('http://localhost:' + paths.nodeJsPort +  '/auth') ;
+  proxyOptionsAuthRoute.route = '/auth';
+
+  browserSync({
+    open: false,
+    port: paths.webServerPort,
+    server: {
+      baseDir: ['.'],
+      middleware: [
+        proxyOptionsAccessControl, 
+        proxy(proxyOptionsApiRoute), 
+        proxy(proxyOptionsAuthRoute)]
+    }
+  }, done);
+});
+</code></pre><p>You might notice that we need another npm module for the proxy middleware, so install it from the client folder as development dependency:</p>
+<pre><code>npm install --save-dev proxy-middleware
+</code></pre><p>Update also the path.js will following variables:</p>
+<pre><code>nodeJsPort:3000,
+webServerPort : 4000
+</code></pre><h2 id="step-5-add-the-customer-model-in-the-loopback-server-app">step 5: add the customer model in the loopback server app</h2>
+<p>This is done again with the yeoman tooling from the server folder:</p>
+<pre><code>yo loopback:model
+</code></pre><p>Again some steps to follow and some questions to answer (consult the loopback documentation for more details). Make sure to create a model called customer with the fields firstName and lastName (case sensitive). When asked for a plural name for customer, make sure to type customers.
+Let&rsquo;s directly do a small tweak so that our in memory data are stored in a file:
+Locate in the server project the file dataSource.json and adjust as follows:</p>
+<pre><code>{
+  &quot;db&quot;: {
+    &quot;name&quot;: &quot;db&quot;,
+    &quot;connector&quot;: &quot;memory&quot;,
+    &quot;file&quot;:&quot;mydata.json&quot;
+  }
+}
+</code></pre><p>All data will now be saved in the file mydata.json.</p>
+<h2 id="step-6-add-a-basic-crud-scenario-in-the-aurelia-spa">Step 6: add a basic crud scenario in the aurelia SPA.</h2>
+<p>The easiest way to proceed is to copy some file from github into your client project.
+I have stored all artefacts for the customer scenario in a folder customer in a modules parent folder:
+<img src="/content/images/2015/08/client-files.png" alt="">
+Copy these over from <a href="https://github.com/paulvanbladel/aurelia-loopback-sample/tree/master/client/src/modules/customer">github</a>.</p>
+<p>We also need to add the customer router in the app.js:</p>
+<pre><code class="language-language-javascript" data-lang="language-javascript">import 'bootstrap';
+import 'bootstrap/css/bootstrap.css!';
+
+export class App {
+  configureRouter(config, router){
+    config.title = 'Aurelia';
+    config.map([
+      { route: ['','welcome'], name: 'welcome',      moduleId: './welcome',      nav: true, title:'Welcome' },
+      { route: 'users',       name: 'users',       moduleId: './users',       nav: true, title:'Github Users' },
+      { route: 'child-router', name: 'child-router', moduleId: './child-router', nav: true, title:'Child Router' },
+      { route: 'customer', name: 'customer', moduleId: './modules/customer/index', nav: true, title:'Crm' }
+
+    ]);
+
+    this.router = router;
+  }
+}
+</code></pre><p>Note also I&rsquo;m still using aurelia-http-client, so install that as well from the client folder</p>
+<pre><code>jspm install aurelia-http-client
+</code></pre><h2 id="how-to-run-the-sample">How to run the sample?</h2>
+<p>You need to open two command prompts (you will appreciate here the tabs in the Cmder tool): 
+One in the client folder and one in the server folder. In the server folder type:</p>
+<pre><code>node server.js
+</code></pre><p>This should give following output:</p>
+<pre><code>λ node server.js
+Browse your REST API at http://localhost:3000/explorer
+Web server listening at: http://localhost:3000/
+</code></pre><p>In the client folder type:</p>
+<pre><code>gulp watch
+</code></pre><p>Normally, it should be possible to use a gulp tool like NodeMon for automatically starting the server side nodeJs process and restarting it when there a file changes.
+A bug in NodeMon specific to the above folder structure, prevents me from demonstrating this here.
+Anyhow, you will need a command prompt in the server project when you want to run the yeoman scaffolding for generating other models, etc. &hellip;
+##What&rsquo;s next.
+Quite obvious: build our own aurelia-loopback generator :)
+##Conclusion
+This was an unusual long post given the fact that every step has been explained in detail.
+Nonetheless, when you understand the above, you can do it on your own in 5 minutes, <strong>as advertised</strong> !
+Enjoy !</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "opinionatedapps" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-dark-green bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://blog.opinionatedapps.com/" >
+    &copy; 2020 Opinionatedapps blog
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

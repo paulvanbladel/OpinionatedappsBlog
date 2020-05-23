@@ -1,8 +1,10 @@
 baseURL = "http://blog.opinionatedapps.com/"
+# baseURL = "http://localhost:1313/"
 languageCode = "en-us"
 title = "Opinionatedapps blog"
 theme = "ananke"
 disqusShortname = "opinionatedapps"
+publishDir = "docs"
 [params]
   body_classes = "avenir bg-near-white"
   background_color_class = "bg-dark-green"

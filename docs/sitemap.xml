@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/a-pure-client-side-elastic-search-solution-with-vuejs/</loc>
+    <lastmod>2018-11-05T12:20:48+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/</loc>
+    <lastmod>2018-11-05T12:20:48+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/</loc>
+    <lastmod>2018-11-05T12:20:48+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/aurelia-app-cli-in-minutes/</loc>
+    <lastmod>2016-10-03T12:20:48+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/my-favorite-software-development-principles/</loc>
+    <lastmod>2016-06-23T18:07:37+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/on-the-exceptional-nature-of-net-exceptions/</loc>
+    <lastmod>2016-06-20T15:48:27+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/making-a-decent-recording-with-a-digital-piano-without-expensive-equipment/</loc>
+    <lastmod>2016-05-30T07:00:57+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/does-aurelia-auth-support-webpack/</loc>
+    <lastmod>2016-03-25T06:51:30+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/how-does-aurelia-auth-support-multiple-endpoints/</loc>
+    <lastmod>2016-03-25T06:40:02+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/support-for-fetch-client-in-the-aurelia-auth-plugin/</loc>
+    <lastmod>2015-10-29T09:03:37+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/using-sqlite3-inside-an-aspnet5-docker-image-as-web-api-persistence-store/</loc>
+    <lastmod>2015-09-11T07:24:39+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/running-a-asp-net-5-web-api-side-by-side-on-windows-and-linux/</loc>
+    <lastmod>2015-09-10T14:46:30+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/an-uber-simple-gulp-typescript-workflow-for-aurelia/</loc>
+    <lastmod>2015-08-11T15:51:30+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/a-lean-aurelia-typescript-deveopment-experience/</loc>
+    <lastmod>2015-08-08T10:59:54+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/build-a-minimalist-crm-app-in-5-minutes-with-aurelia-and-loopback/</loc>
+    <lastmod>2015-08-01T12:18:08+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/aureliauth-a-token-based-authentication-plugin-for-aurelia/</loc>
+    <lastmod>2015-07-06T07:28:23+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/gulp-adventures-part-2/</loc>
+    <lastmod>2015-03-12T12:47:55+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/gulp-adventures-part-1/</loc>
+    <lastmod>2015-03-12T10:07:32+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/using-mongodb-with-automatic-fail-over/</loc>
+    <lastmod>2015-03-08T11:06:21+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/webapi-aspnet-vnext-mono-via-docker-on-ubuntu-linux-part-2/</loc>
+    <lastmod>2015-02-25T08:01:08+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/webapi-aspnet-vnext-mono-via-docker-on-ubuntu-linux-part-1/</loc>
+    <lastmod>2015-02-24T14:08:40+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/running-a-nodejs-app-on-nginx-part-2/</loc>
+    <lastmod>2015-01-22T21:33:07+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/running-a-nodejs-app-on-nginx-part-1/</loc>
+    <lastmod>2015-01-20T15:12:11+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/adopting-a-lean-web-app-server-infrastructure-based-on-nginx-part-3/</loc>
+    <lastmod>2015-01-15T19:58:06+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/adopting-a-lean-web-app-server-infrastructure-based-on-nginx-part-2/</loc>
+    <lastmod>2015-01-15T14:38:18+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/adopting-a-lean-web-app-server-infrastructure-part-1/</loc>
+    <lastmod>2015-01-15T12:13:48+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/about/</loc>
+    <lastmod>2015-01-12T13:59:53+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/contact/</loc>
+    <lastmod>2015-01-12T13:59:36+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/posts/welcome-to-my-new-blog/</loc>
+    <lastmod>2015-01-09T18:11:09+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/categories/</loc>
+  </url>
+  
+  <url>
+    <loc>http://blog.opinionatedapps.com/tags/</loc>
+  </url>
+  
+</urlset>

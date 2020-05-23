@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Opinionatedapps blog  | Running a NodeJs app on nginx (1/2)</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.71.0" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="Running a NodeJs app on nginx (1/2)" />
+<meta property="og:description" content="##Introduction In the previous post we did setup a nginx web server for serving static pages. In this post, we will host a NodeJs application and make sure it will survice application crashes.
+##The sample NodeJs application We&rsquo;ll focus on how nginx handles NodeJs, so we just need a dummy app but we want that the app logs both normal and failure behavior. So, let&rsquo;s create a NodeJs application under /usr/share/nginx/app1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.opinionatedapps.com/posts/running-a-nodejs-app-on-nginx-part-1/" />
+<meta property="article:published_time" content="2015-01-20T15:12:11+00:00" />
+<meta property="article:modified_time" content="2015-01-20T15:12:11+00:00" />
+<meta itemprop="name" content="Running a NodeJs app on nginx (1/2)">
+<meta itemprop="description" content="##Introduction In the previous post we did setup a nginx web server for serving static pages. In this post, we will host a NodeJs application and make sure it will survice application crashes.
+##The sample NodeJs application We&rsquo;ll focus on how nginx handles NodeJs, so we just need a dummy app but we want that the app logs both normal and failure behavior. So, let&rsquo;s create a NodeJs application under /usr/share/nginx/app1.">
+<meta itemprop="datePublished" content="2015-01-20T15:12:11&#43;00:00" />
+<meta itemprop="dateModified" content="2015-01-20T15:12:11&#43;00:00" />
+<meta itemprop="wordCount" content="658">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Running a NodeJs app on nginx (1/2)"/>
+<meta name="twitter:description" content="##Introduction In the previous post we did setup a nginx web server for serving static pages. In this post, we will host a NodeJs application and make sure it will survice application crashes.
+##The sample NodeJs application We&rsquo;ll focus on how nginx handles NodeJs, so we just need a dummy app but we want that the app logs both normal and failure behavior. So, let&rsquo;s create a NodeJs application under /usr/share/nginx/app1."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-dark-green">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://blog.opinionatedapps.com/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Opinionatedapps blog
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">Running a NodeJs app on nginx (1/2)</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2015-01-20T15:12:11Z">January 20, 2015</time>      
+      
+      
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><p>##Introduction
+In the previous post we did setup a nginx web server for serving static pages.
+In this post, we will host a NodeJs application and make sure it will survice application crashes.</p>
+<p>##The sample NodeJs application
+We&rsquo;ll focus on how nginx handles NodeJs, so we just need a dummy app but we want that the app logs both normal and failure behavior.
+So, let&rsquo;s create a NodeJs application under /usr/share/nginx/app1. We&rsquo;ll create the app today directy on our server. It&rsquo;s a good habit to first create a package.json file by typing in the app1 folder:</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>This will guide you through a kind of wizard resulting in a package.json file:</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>Note that we slightly adapted the package.json in such way there is an npm start verb. We did this by adding under &ldquo;scripts&rdquo;: &ldquo;start&rdquo;: &ldquo;node index&rdquo;.</p>
+<pre><code class="language-language-javascript" data-lang="language-javascript">var http = require('http');
+http.createServer(function (req, res) {
+    var input = req.url.toString();
+    res.writeHead(200, {'Content-Type': 'text/plain'});
+    res.end('thanks for ' + input + ' on ' + new Date().toISOString() + '\n');
+    if(input=='/warning'){
+        console.info(&quot;a warning occured on &quot; + new Date().toISOString());
+    }
+    if (input=='/crash'){
+        console.error(&quot;a crash occured on &quot; + new Date().toISOString());
+        throw &quot;serious error&quot;;
+    }
+}).listen(1337, '127.0.0.1');
+
+console.log('Server running at http://127.0.0.1:1337/' + ' ' + new Date().toISOString());
+</code></pre><p>As you can see, not really a large scale business application. The app simply logs the incoming url and covers 2 specific cases:</p>
+<ul>
+<li>when the url matches exactly &lsquo;/warning&rsquo; a specific logging occurs and</li>
+<li>when the url matches exactly &lsquo;/crash&rsquo;, we raise an error and make an logging in the error log.</li>
+</ul>
+<p>This provides us immediately two important scenarios:</p>
+<ul>
+<li>we are making use of the <strong>relative url</strong> in this app (the input variable). So, when the user provides as url: app1.opinionatedapps.com/mytext, the input variable will be &lsquo;mytext&rdquo;. But what happens when we deploy our application not directly on a subdomain but in a subfolder. Well, a requirement will be that the application should not be aware of that. So, our nginx configuration should make sure that demosite1.opinionatedapps.com/app1/mytext gives as url also &ldquo;mytext&rdquo; and not  &ldquo;/app1/mytext&rdquo;.</li>
+<li>when the app crashes, <strong>we need something to restart and recover automatically</strong>. Nginx will not do this for us. That&rsquo;s a big difference with a web server like IIS running Asp.Net apps. In the IIS scenario, both the runtime (Asp.Net) and the server (IIS) are quite intimitely integrated. That&rsquo;s not the case with nginx which doesn&rsquo;t know anything at all about about NodeJs. At first glance, this feels like a step backwards when it comes to comfort but in a way it&rsquo;s a much cleaner seperation of concerns and it reflex the Unix philosophy of components doing simply one thing but doing it really good.
+Ok, let&rsquo;s first test if the app runs by typing :</li>
+</ul>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>You should see now in the console something like : Server running at http://127 &hellip;
+Obviously, so far our app runs also as a backend process on our server, we need to configure nginx to expose the application behind port 80. That&rsquo;s what we&rsquo;ll do next.</p>
+<h2 id="configure-nginx-for-the-nodejs-app">configure nginx for the NodeJs app</h2>
+<p>We&rsquo;ll need to update the file demosite1.opinionatedapps.com inside the /etc/nginx/sites-enabled folder as follows:</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>The above assures that nginx acts as kind of reverse proxy and forwards all requests to /app1 to port 1337 where nodeJs is running our app1.
+Let&rsquo;s try now from the browser:</p>
+<p><a href="http://demosite1.opinionatedapps.com/app1/HiThere">http://demosite1.opinionatedapps.com/app1/HiThere</a> 
+which gives as output:</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>and that&rsquo;s not what we want. We don&rsquo;t want to see &lsquo;app1&rsquo; in the url, but we want a path relative to the application root inside the app1 folder !
+We can accomplish this by adding following line inside the location block of app1:</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>##Force an app crash now
+<a href="http://demosite1.opinionatedapps.com/app1/warning">http://demosite1.opinionatedapps.com/app1/warning</a> is triggering a warning message, which we can see in the output window of the NodeJs app. That&rsquo;s good. But what happens if we trigger an app crash by browsing to:</p>
+<!-- raw HTML omitted -->
+<!-- raw HTML omitted -->
+<p>That&rsquo;s all as expected, but we have a serious problem now, the app stopped completely.
+We&rsquo;ll cover that scenario in the next episode.</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "opinionatedapps" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-dark-green bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://blog.opinionatedapps.com/" >
+    &copy; 2020 Opinionatedapps blog
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

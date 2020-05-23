@@ -1,0 +1,408 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Opinionatedapps blog  | WebApi AspNet.Vnext Mono with Entity Framework via docker on Ubuntu Linux (part 1/n)</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.71.0" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="WebApi AspNet.Vnext Mono with Entity Framework via docker on Ubuntu Linux (part 1/n)" />
+<meta property="og:description" content="Introduction I have been working lately quite insensively in the Linux world. Time again for some .Net. Let&rsquo;s see what happened in the mean time with AspNet Vnext and let&rsquo;s explore a Katana based web api. But we will not completely leave the Linux world. We&rsquo;ll use Mono and run the web api on an ubuntu server and use Docker. We&rsquo;ll connect the web api to a database backend via Entity Framework 6." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.opinionatedapps.com/posts/webapi-aspnet-vnext-mono-via-docker-on-ubuntu-linux-part-1/" />
+<meta property="article:published_time" content="2015-02-24T14:08:40+00:00" />
+<meta property="article:modified_time" content="2015-02-24T14:08:40+00:00" />
+<meta itemprop="name" content="WebApi AspNet.Vnext Mono with Entity Framework via docker on Ubuntu Linux (part 1/n)">
+<meta itemprop="description" content="Introduction I have been working lately quite insensively in the Linux world. Time again for some .Net. Let&rsquo;s see what happened in the mean time with AspNet Vnext and let&rsquo;s explore a Katana based web api. But we will not completely leave the Linux world. We&rsquo;ll use Mono and run the web api on an ubuntu server and use Docker. We&rsquo;ll connect the web api to a database backend via Entity Framework 6.">
+<meta itemprop="datePublished" content="2015-02-24T14:08:40&#43;00:00" />
+<meta itemprop="dateModified" content="2015-02-24T14:08:40&#43;00:00" />
+<meta itemprop="wordCount" content="940">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="WebApi AspNet.Vnext Mono with Entity Framework via docker on Ubuntu Linux (part 1/n)"/>
+<meta name="twitter:description" content="Introduction I have been working lately quite insensively in the Linux world. Time again for some .Net. Let&rsquo;s see what happened in the mean time with AspNet Vnext and let&rsquo;s explore a Katana based web api. But we will not completely leave the Linux world. We&rsquo;ll use Mono and run the web api on an ubuntu server and use Docker. We&rsquo;ll connect the web api to a database backend via Entity Framework 6."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-dark-green">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://blog.opinionatedapps.com/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Opinionatedapps blog
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">WebApi AspNet.Vnext Mono with Entity Framework via docker on Ubuntu Linux (part 1/n)</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2015-02-24T14:08:40Z">February 24, 2015</time>      
+      
+      
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="introduction">Introduction</h2>
+<p>I have been working lately quite insensively in the Linux world. Time again for some .Net.
+Let&rsquo;s see what happened in the mean time with AspNet Vnext and let&rsquo;s explore a Katana based web api.
+But we will not completely leave the Linux world. We&rsquo;ll use Mono and run the web api on an ubuntu server and use Docker. We&rsquo;ll connect the web api to a database backend via Entity Framework 6. Indeed, quite a lot of new technologies. Let&rsquo;s start with the web api in visual studio.</p>
+<h2 id="a-nodejs-inspired-aspnet-vnext">A NodeJS inspired AspNet Vnext</h2>
+<p>It was definitely time for a decent successor for System.Web. It&rsquo;s very clear that AspNet Vnext got some inspiration in the middleware-based approach of NodeJs. 
+I&rsquo;ll spend not that much time here on the web api because there is plenty of information on the net on this. I&rsquo;ll save my energy for the more interesting Mono and Docker adventures when hosting the web api on an ubuntu server.</p>
+<p>In NodeJs a middleware component is injected via app.use(), we&rsquo;ll do something similar in .Net now. In the Startup class we&rsquo;ll do the following:</p>
+<pre><code class="language-language-csharp" data-lang="language-csharp">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Owin;
+using System.Web.Http;
+namespace OwinMonoDocker
+{
+    public class Startup
+    {
+        public void Configuration(IAppBuilder app)
+        {
+            var webApiConfiguration = ConfigureWebApi();
+            app.UseWebApi(webApiConfiguration);
+        }
+        
+        private HttpConfiguration ConfigureWebApi()
+        {
+            var config = new HttpConfiguration();
+            config.MapHttpAttributeRoutes();
+            config.Routes.MapHttpRoute(
+                &quot;DefaultApi&quot;,
+                &quot;api/{controller}/{id}&quot;,
+                new { id = RouteParameter.Optional });
+            return config;
+        }
+    }
+}
+
+</code></pre><p>Now, we will self-host our web api, via following code in the main method of the console application</p>
+<pre><code class="language-language-csharp" data-lang="language-csharp">using Microsoft.Owin.Hosting;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OwinMonoDocker
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string baseUri = &quot;http://*:8080&quot;;
+            // in debug in visual studio you will need 
+            //string baseUri = &quot;http://localhost:8080&quot;;
+
+            Console.WriteLine(&quot;Starting web Server...&quot;);
+            WebApp.Start&lt;Startup&gt;(baseUri);
+            Console.WriteLine(&quot;Server running at {0} - press Enter to quit. &quot;, baseUri);
+            Console.WriteLine(&quot;I'm running on {0} directly from assembly {1}&quot;, Environment.OSVersion, System.Reflection.Assembly.GetEntryAssembly().FullName);
+            Console.ReadLine();
+        }
+    }
+}
+</code></pre><p>As you can see were printing the OS Version when running this web api. In a later post in this series, you will be surprised when UNIX pops up over there :)</p>
+<pre><code>Starting web Server...
+Server running at http://*:8080 - press Enter to quit.
+I'm running on Unix 3.13.0.40 directly from assembly OwinMonoDocker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+</code></pre><p>While in the visual studio debug environment on a windows box you&rsquo;ll see of course:</p>
+<pre><code>Starting web Server...
+Server running at http://localhost:8080 - press Enter to quit.
+I'm running on Microsoft Windows NT 6.2.9200.0 directly from assembly OwinMonoDocker, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+</code></pre><p>You could also use Monodevelop on a linux box and then you&rsquo;ll never see again &ldquo;Microsoft Windows&rdquo; on your screen. I&rsquo;m fine with visual studio on windows, for the time being.</p>
+<p>Our web api will manage Customers:</p>
+<pre><code class="language-language-csharp" data-lang="language-csharp">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OwinMonoDocker
+{
+    public class Customer
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
+}
+</code></pre><p>Finally we&rsquo;ll need our customer controller:</p>
+<pre><code class="language-language-csharp" data-lang="language-csharp">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Web.Http;
+using System.Net.Http;
+using OwinMonoDocker;
+using System.Data.Entity;
+
+namespace OwinMonoDocker
+{
+    public class CustomersController : ApiController
+    {
+        ApplicationDbContext _Db = new ApplicationDbContext();
+
+        [HttpGet]
+        [Route(&quot;api/Customers/MimicCustomerImport/{numberOfRecords}&quot;)]
+        public async Task&lt;IHttpActionResult&gt; MimicCustomerImport(int numberOfRecords)
+        {
+            for (int i = 0; i &lt; numberOfRecords; i++)
+            {
+                _Db.Customers.Add(new Customer { Name = DateTime.Now.ToShortTimeString() + &quot; &quot; + i });    
+            }
+            await _Db.SaveChangesAsync();
+            return Ok();
+        }
+
+        
+        public IEnumerable&lt;Customer&gt; Get()
+        {
+            return _Db.Customers;
+        }
+
+
+        public async Task&lt;Customer&gt; Get(int id)
+        {
+            var customer = await _Db.Customers.FirstOrDefaultAsync(c =&gt; c.Id == id);
+            if (customer == null)
+            {
+                throw new HttpResponseException(
+                    System.Net.HttpStatusCode.NotFound);
+            }
+            return customer;
+        }
+
+
+        public async Task&lt;IHttpActionResult&gt; Post(Customer customer)
+        {
+            if (customer == null)
+            {
+                return BadRequest(&quot;No customer data provided&quot;);
+            }
+            var customerExists = await _Db.Customers.AnyAsync(c =&gt; c.Id == customer.Id);
+
+            if (customerExists)
+            {
+                return BadRequest(&quot;Exists&quot;);
+            }
+
+            _Db.Customers.Add(customer);
+            await _Db.SaveChangesAsync();
+            return Ok();
+        }
+
+
+        public async Task&lt;IHttpActionResult&gt; Put(Customer customer)
+        {
+            if (customer == null)
+            {
+                return BadRequest(&quot;No customer data provided&quot;);
+            }
+            var existing = await _Db.Customers.FirstOrDefaultAsync(c =&gt; c.Id == customer.Id);
+
+            if (existing == null)
+            {
+                return NotFound();
+            }
+
+            existing.Name = customer.Name;
+            await _Db.SaveChangesAsync();
+            return Ok();
+        }
+
+
+        public async Task&lt;IHttpActionResult&gt; Delete(int id)
+        {
+            var customer = await _Db.Customers.FirstOrDefaultAsync(c =&gt; c.Id == id);
+            if (customer == null)
+            {
+                return NotFound();
+            }
+            _Db.Customers.Remove(customer);
+            await _Db.SaveChangesAsync();
+            return Ok();
+        }
+    }
+}
+
+</code></pre><h2 id="the-database-connection">The database connection</h2>
+<p>I&rsquo;m a big fan of Sql Server and entity framework on Mono can perfectly connect to Sql Server but&hellip; unfortunately not to an Azure Sql Server database. 
+That&rsquo;s a pitty, so I needed to switch to MySql which works perfectly.
+We need following entity framework related code:</p>
+<pre><code class="language-language-csharp" data-lang="language-csharp">using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace OwinMonoDocker
+{
+
+    public class ApplicationDbContext : DbContext
+    {
+        public ApplicationDbContext()
+            : base(&quot;myMysqldb&quot;)
+        {
+        }
+        public IDbSet&lt;Customer&gt; Customers { get; set; }
+    }
+    
+    public class ApplicationDbInitializer : CreateDatabaseIfNotExists&lt;ApplicationDbContext&gt;
+    {
+        protected override void Seed(ApplicationDbContext context)
+        {
+            base.Seed(context);
+            context.Customers.Add(new Customer { Name = &quot;Microsoft&quot; });
+            context.Customers.Add(new Customer { Name = &quot;Google&quot; });
+            context.Customers.Add(new Customer { Name = &quot;Apple&quot; });
+        }
+    }
+}
+
+</code></pre><p>For the above, following NuGet packages are used:</p>
+<pre><code class="language-language-markup" data-lang="language-markup">&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-8&quot;?&gt;
+&lt;packages&gt;
+  &lt;package id=&quot;EntityFramework&quot; version=&quot;6.1.2&quot; targetFramework=&quot;net451&quot; /&gt;
+  &lt;package id=&quot;Microsoft.AspNet.WebApi.Client&quot; version=&quot;5.2.4-alpha1-150223&quot; targetFramework=&quot;net451&quot; /&gt;
+  &lt;package id=&quot;Microsoft.AspNet.WebApi.Core&quot; version=&quot;5.2.4-alpha1-150223&quot; targetFramework=&quot;net451&quot; /&gt;
+  &lt;package id=&quot;Microsoft.AspNet.WebApi.Owin&quot; version=&quot;5.2.4-alpha1-150223&quot; targetFramework=&quot;net451&quot; /&gt;
+  &lt;package id=&quot;Microsoft.AspNet.WebApi.OwinSelfHost&quot; version=&quot;5.2.4-alpha1-150223&quot; targetFramework=&quot;net451&quot; /&gt;
+  &lt;package id=&quot;Microsoft.Owin&quot; version=&quot;2.0.2&quot; targetFramework=&quot;net451&quot; /&gt;
+  &lt;package id=&quot;Microsoft.Owin.Host.HttpListener&quot; version=&quot;2.0.2&quot; targetFramework=&quot;net451&quot; /&gt;
+  &lt;package id=&quot;Microsoft.Owin.Hosting&quot; version=&quot;2.0.2&quot; targetFramework=&quot;net451&quot; /&gt;
+  &lt;package id=&quot;MySql.Data&quot; version=&quot;6.8.4&quot; targetFramework=&quot;net451&quot; /&gt;
+  &lt;package id=&quot;MySQL.Data.Entities&quot; version=&quot;6.8.3.0&quot; targetFramework=&quot;net451&quot; /&gt;
+  &lt;package id=&quot;Newtonsoft.Json&quot; version=&quot;6.0.4&quot; targetFramework=&quot;net451&quot; /&gt;
+  &lt;package id=&quot;Owin&quot; version=&quot;1.0&quot; targetFramework=&quot;net451&quot; /&gt;
+&lt;/packages&gt;
+</code></pre><h2 id="the-sources">The sources</h2>
+<p>The sources are available on <a href="https://github.com/paulvanbladel/AspNet5-Web-Api-Sample/tree/blog-sample">github</a></p>
+<h2 id="whats-next">What&rsquo;s next</h2>
+<p>This post was simply kind of preparation for the next big step: introducing DOCKER.
+Stay tuned !</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "opinionatedapps" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-dark-green bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://blog.opinionatedapps.com/" >
+    &copy; 2020 Opinionatedapps blog
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>

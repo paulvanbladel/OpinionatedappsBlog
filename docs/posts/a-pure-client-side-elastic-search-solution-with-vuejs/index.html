@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    
+    <title>Opinionatedapps blog  | A pure client side minimal elastic search solution with VueJs/Quasar</title>
+    <meta name="HandheldFriendly" content="True">
+    <meta name="MobileOptimized" content="320">
+
+    <meta name="viewport" content="width=device-width,minimum-scale=1">
+    <meta name="generator" content="Hugo 0.71.0" />
+    
+    
+      <META NAME="ROBOTS" CONTENT="NOINDEX, NOFOLLOW">
+    
+
+    
+    
+      <link href="/dist/css/app.e08a958ae3e530145318b6373195c765.css" rel="stylesheet">
+    
+
+    
+
+    
+      
+    
+
+    
+
+    <meta property="og:title" content="A pure client side minimal elastic search solution with VueJs/Quasar" />
+<meta property="og:description" content="introduction Although seriously simplified thanks to docker, setting up elastic search is a tedious task and requires quite a lot of plumbing in order to integrate it with a single page application.
+An example of a such an elastic search can be found here: elastic search sample
+Under a specific set of conditions, elastic search functionality can be provided in a much simpler way, purely client side, in the browser." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://blog.opinionatedapps.com/posts/a-pure-client-side-elastic-search-solution-with-vuejs/" />
+<meta property="article:published_time" content="2018-11-05T12:20:48+00:00" />
+<meta property="article:modified_time" content="2018-11-05T12:20:48+00:00" />
+<meta itemprop="name" content="A pure client side minimal elastic search solution with VueJs/Quasar">
+<meta itemprop="description" content="introduction Although seriously simplified thanks to docker, setting up elastic search is a tedious task and requires quite a lot of plumbing in order to integrate it with a single page application.
+An example of a such an elastic search can be found here: elastic search sample
+Under a specific set of conditions, elastic search functionality can be provided in a much simpler way, purely client side, in the browser.">
+<meta itemprop="datePublished" content="2018-11-05T12:20:48&#43;00:00" />
+<meta itemprop="dateModified" content="2018-11-05T12:20:48&#43;00:00" />
+<meta itemprop="wordCount" content="1002">
+
+
+
+<meta itemprop="keywords" content="" /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A pure client side minimal elastic search solution with VueJs/Quasar"/>
+<meta name="twitter:description" content="introduction Although seriously simplified thanks to docker, setting up elastic search is a tedious task and requires quite a lot of plumbing in order to integrate it with a single page application.
+An example of a such an elastic search can be found here: elastic search sample
+Under a specific set of conditions, elastic search functionality can be provided in a much simpler way, purely client side, in the browser."/>
+
+  </head>
+
+  <body class="ma0 avenir bg-near-white">
+
+    
+   
+  
+
+  <header>
+    <div class="bg-dark-green">
+      <nav class="pv3 ph3 ph4-ns" role="navigation">
+  <div class="flex-l justify-between items-center center">
+    <a href="http://blog.opinionatedapps.com/" class="f3 fw2 hover-white no-underline white-90 dib">
+      Opinionatedapps blog
+    </a>
+    <div class="flex-l items-center">
+      
+      
+
+
+
+
+
+
+
+
+
+    </div>
+  </div>
+</nav>
+
+    </div>
+  </header>
+
+
+
+    <main class="pb7" role="main">
+      
+  
+  <article class="flex-l flex-wrap justify-between mw8 center ph3 ph0-l">
+
+    <header class="mt4 w-100">
+      <p class="f6 b helvetica tracked">
+          
+        POSTS
+      </p>
+      <h1 class="f1 athelas mb1">A pure client side minimal elastic search solution with VueJs/Quasar</h1>
+      
+      <time class="f6 mv4 dib tracked" datetime="2018-11-05T12:20:48Z">November 5, 2018</time>      
+      
+      
+    </header>
+
+    <main class="nested-copy-line-height lh-copy serif f4 nested-links nested-img mid-gray pr4-l w-two-thirds-l"><h2 id="introduction">introduction</h2>
+<p>Although seriously simplified thanks to docker, setting up elastic search is a tedious task and requires quite a lot of plumbing in order to integrate it with a single page application.</p>
+<p>An example of a such an elastic search can be found here: <a href="http://blog.opinionatedapps.com/ItemsJs-Vue-Demo/">elastic search sample</a></p>
+<p>Under a specific set of conditions, elastic search functionality can be provided in a much simpler way, purely client side, in the browser.</p>
+<p>In this blog post, I&rsquo;ll demonstrate this with a VueJs Single page application with the brilliant <a href="https://quasar-framework.org/">Quasar framework</a>.</p>
+<h2 id="moving-the-meat-of-the-elastic-search-to-the-browser">moving the meat of the elastic search to the browser</h2>
+<p>In the solution i&rsquo;m proposing, I&rsquo;m completely eliminating all server side elastic search functionality. For this blog post, it&rsquo;s even indifferent where the data we present in the typeical elastic search manner, come from.</p>
+<p>Modern single page application or PWA&rsquo;s (progressive web apps) often retrieve data from the server in an unconvential manner via web workers or via socket communication.</p>
+<p>So, this post doesn&rsquo;t focus on that specific retrieval process, but purely on the client side elastic search presentation part.</p>
+<p>The above link (<a href="http://blog.opinionatedapps.com/ItemsJs-Vue-Demo/">elastic search sample</a>) I provided is in a fact a client side elastic search. 
+So let&rsquo;s explorer how we can build such a search screen with VueJs</p>
+<h2 id="how-does-our-data-look-like">how does our data look like.</h2>
+<p>As said, we presume that there is a data retrieval process in place (e.g. via a browser database). On order to be able to focus completely on the elastic search presentation part, 
+in my sample I baked the data directly in the SPA under the form of a json document.
+One record in that json doc looks like:</p>
+<pre><code> {
+    &quot;reviews_count&quot;: 4446,
+    &quot;runtime&quot;: 142,
+    &quot;country&quot;: [&quot;USA&quot;],
+    &quot;tags&quot;: [&quot;prison&quot;, &quot;wrongful imprisonment&quot;, &quot;escape from prison&quot;, &quot;prison cell search&quot;, &quot;first person narration&quot;],
+    &quot;genres&quot;: [&quot;Crime&quot;, &quot;Drama&quot;],
+    &quot;actors&quot;: [
+      &quot;Tim Robbins&quot;,
+      &quot;Morgan Freeman&quot;,
+      &quot;Bob Gunton&quot;,
+      &quot;William Sadler&quot;,
+      &quot;Clancy Brown&quot;,
+      &quot;Gil Bellows&quot;,
+      &quot;Mark Rolston&quot;,
+      &quot;James Whitmore&quot;,
+      &quot;Jeffrey DeMunn&quot;,
+      &quot;Larry Brandenburg&quot;,
+      &quot;Neil Giuntoli&quot;,
+      &quot;Brian Libby&quot;,
+      &quot;David Proval&quot;,
+      &quot;Joseph Ragno&quot;,
+      &quot;Jude Ciccolella&quot;
+    ],
+    &quot;name&quot;: &quot;The Shawshank Redemption&quot;,
+    &quot;year&quot;: 199,
+    &quot;rating&quot;: 9.3,
+    &quot;votes&quot;: 1790841,
+    &quot;image&quot;: &quot;https://s3-eu-west-1.amazonaws.com/example-items/movies/5940bf19-4874-41a0-b458-30b5de9ca39b-orig.jpg&quot;,
+    &quot;description&quot;: &quot;Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.&quot;,
+    &quot;storyline&quot;: &quot;Chronicles the experiences of a formerly successful banker as a prisoner in the gloomy jailhouse of Shawshank after being found guilty of a crime he did not commit. The film portrays the man's unique way of dealing with his new, torturous life; along the way he befriends a number of fellow prisoners, most notably a wise long-term inmate named Red. Written by J-S-Golden&quot;,
+    &quot;director&quot;: [&quot;Frank Darabont&quot;]
+  },
+</code></pre><p>So, enough material to make the elastic search a bit exciting: tags, multiple actors figurating in different movies, multiple genres, &hellip; you name it.</p>
+<h2 id="the-vuejs-search-screen">the VueJs Search screen</h2>
+<p>The amount of markup and code needed is surprisingly low.
+Basically the screen has a left part where the elastic search magic happens and right part where the search results are presented.
+The left part is managed via a vuejs component called items-js-facets. We&rsquo;ll explorer that in a minute.
+The components takes as input some elastic search config data and return via an event (searchResultUpdated)the search results.
+The right part is basic vuejs stuff for rendering the search results.</p>
+<pre><code class="language-language-javascript" data-lang="language-javascript">&lt;template&gt;
+  &lt;q-page padding&gt;
+    &lt;div class=&quot;row&quot;&gt;
+      &lt;div class=&quot;col-3&quot;&gt;
+        &lt;items-js-facets :rows=&quot;jsonData&quot; :configuration=&quot;configuration&quot; 
+            @searchResultUpdated=&quot;searchResultUpdated&quot;&gt;
+        &lt;/items-js-facets&gt;
+      &lt;/div&gt;
+      &lt;div class=&quot;col-1&quot;&gt;&lt;/div&gt;
+      &lt;div class=&quot;col-7&quot;&gt;
+        &lt;q-list&gt;
+          &lt;q-item v-for=&quot;item of items&quot; :key=&quot;item.name&quot;&gt;
+            &lt;q-item-side&gt;&lt;img style=&quot;width: 100px;&quot; v-bind:src=&quot;item.image&quot;&gt;
+            &lt;/q-item-side&gt;
+            &lt;q-item-main :label=&quot;item.name&quot; :sublabel=&quot;item.description&quot;&gt;
+              &lt;q-item-tile&gt;
+                &lt;br&gt;
+                &lt;q-chip small tag v-for=&quot;tag in item.tags&quot;
+                     :key=&quot;tag.key&quot;&gt;{{ tag }} &lt;/q-chip&gt;
+              &lt;/q-item-tile&gt;
+            &lt;/q-item-main&gt;
+            &lt;q-item-side right&gt;{{item.year[0]}}&lt;/q-item-side&gt;
+          &lt;/q-item&gt;
+        &lt;/q-list&gt;
+      &lt;/div&gt;
+    &lt;/div&gt;
+  &lt;/q-page&gt;
+&lt;/template&gt;
+&lt;style&gt;
+&lt;/style&gt;
+&lt;script&gt;
+
+import rawJson from './imdb.json'
+import ItemsJsFacets from './ItemsJsFacets.vue'
+export default {
+  components:{ItemsJsFacets},
+  created() {
+    this.jsonData = rawJson
+     this.jsonData.forEach(e =&gt; {
+        e.year = [e.year.toString()]
+      })
+  },
+  data() {
+    var configuration = {
+      searchableFields: ['title', 'tags', 'actors'],
+      sortings: {
+        name_asc: {
+          field: 'name', order: 'asc' }
+       },
+      aggregations: {
+        tags: { title: 'Tags', size: 200 },
+        actors: { title: 'Actors', size: 10 },
+        genres: { title: 'Genres', size: 10 },
+        country: { title: 'Country', size:20 },
+        year: { title: 'Year', size:100 }
+      }
+    }
+    return {
+      jsonData: [],
+      configuration,
+      items: []
+
+    }
+  },
+  methods: 
+  {
+    searchResultUpdated(d) {
+      this.items = d
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre><h2 id="introducing-items-js">introducing items-js</h2>
+<p>Let&rsquo;s get a bit closer now to the elastic search magic. I&rsquo;m using an amazing library called ItemsJs, which is doing all the heavy lifting of generating facets and executing the search in a simple json document.</p>
+<p><a href="https://github.com/itemsapi/itemsjs">ItemsJs on github</a></p>
+<h2 id="this-items-js-facets-component">this items-js-facets component</h2>
+<p>The integration of ItemsJs in our vueJs is again very simple. I&rsquo;m only adding a nice VueJs sauce which gives an elegant presentation of the facets.</p>
+<pre><code class="language-language-javascript" data-lang="language-javascript">&lt;template&gt;
+  &lt;div&gt;
+    &lt;q-search inverted color='primary' v-model=&quot;query&quot; @clear=&quot;reset()&quot; placeholder=&quot;Type your search here...&quot; clearable /&gt;
+     &lt;p class=&quot;text-right&quot;&gt;Search performed in {{ searchResult.timings.search }} ms, facets in {{ searchResult.timings.facets }} ms&lt;/p&gt; --&gt;
+    &lt;br&gt;
+    &lt;div&gt;
+      &lt;span v-for=&quot;facet in searchResult.data.aggregations&quot; :key=&quot;facet.name&quot;&gt;
+        &lt;span v-for=&quot;bucket in filters[facet.name]&quot; :key=&quot;bucket.key&quot;&gt;
+          &lt;q-chip closable @hide=&quot;unselectBucket(facet.name,bucket)&quot; color=&quot;primary&quot;&gt;
+            {{bucket}}
+          &lt;/q-chip&gt;
+        &lt;/span&gt;
+      &lt;/span&gt;
+    &lt;/div&gt;
+    &lt;div&gt;
+      &lt;q-list dense v-for=&quot;facet2 in searchResult.data.aggregations&quot; :key=&quot;facet2.name&quot;&gt;
+        &lt;q-collapsible group=&quot;mygroup&quot; :header-class=&quot;filters[facet2.name].length &gt; 0?'text-bold text-italic':''&quot; :label=&quot;getFacetLabel(facet2)&quot;&gt;
+          &lt;q-item v-for=&quot;bucket in facet2.buckets&quot; :key=&quot;bucket.key&quot;&gt;
+            &lt;q-checkbox v-model=&quot;filters[facet2.name]&quot; :val=&quot;bucket.key&quot; :label=&quot;getBucketLabel(bucket)&quot;&gt;
+            &lt;/q-checkbox&gt;
+          &lt;/q-item&gt;
+        &lt;/q-collapsible&gt;
+      &lt;/q-list&gt;
+    &lt;/div&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+&lt;style&gt;
+&lt;/style&gt;
+&lt;script&gt;
+
+
+import itemsjs from 'itemsjs'
+export default {
+  props:['rows','configuration'],
+  created() {
+    this.itemsJsInstance = itemsjs(this.rows, this.configuration)
+  },
+  data() {
+   var filters = {};
+    Object.keys(this.configuration.aggregations).map(function(v) {
+      filters[v] = [];
+    })
+
+    return {
+      query: '',
+      filters,
+      itemsJsInstance: {}
+    }
+  },
+  methods: {
+    getFacetLabel(facet) {
+      return facet.title
+    },
+    unselectBucket(facetName, tagBucket) {
+      this.filters[facetName] = this.filters[facetName].filter(item =&gt; item !== tagBucket)
+    },
+    getBucketLabel(bucket) {
+      return bucket.key + ' (' + bucket.doc_count + ')'
+    },
+    reset() {
+      var filters = {}
+      Object.keys(this.optionList.aggregations).map(function(v) {
+        filters[v] = []
+      })
+      this.filters = filters
+      this.query = ''
+    },
+  },
+    computed: {
+    searchResult() {
+      let result =  this.itemsJsInstance.search({
+        per_page:100,
+        query: this.query,
+        filters: this.filters
+      })
+      this.$emit('searchResultUpdated', result.data.items)
+      return result
+    }
+  }
+}
+&lt;/script&gt;
+</code></pre><h2 id="will-i-need-ever-again-the-full-blown-server-side-elastic-search-">will I need ever again the full blown server side elastic search ?</h2>
+<p>Yes you will !
+The client side approach only works with a limited set of data (a few thousand records probably) but is of course extremly fast.</p>
+<h2 id="where-are-the-sources">where are the sources?</h2>
+<p><a href="https://github.com/paulvanbladel/ItemsJs-Vue-Demo">github</a></p>
+<p><a href="http://blog.opinionatedapps.com/ItemsJs-Vue-Demo/">sample</a></p>
+<p>Cheers</p>
+<p>paul</p>
+<ul class="pa0">
+  
+</ul>
+<div class="mt6">
+        <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "opinionatedapps" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      </div>
+    </main>
+
+    <aside class="w-30-l mt6-l">
+
+
+
+
+</aside>
+
+  </article>
+
+    </main>
+    <footer class="bg-dark-green bottom-0 w-100 pa3" role="contentinfo">
+  <div class="flex justify-between">
+  <a class="f4 fw4 hover-white no-underline white-70 dn dib-ns pv2 ph3" href="http://blog.opinionatedapps.com/" >
+    &copy; 2020 Opinionatedapps blog
+  </a>
+    <div>
+
+
+
+
+
+
+
+
+</div>
+  </div>
+</footer>
+
+    
+
+  <script src="/dist/js/app.3fc0f988d21662902933.js"></script>
+
+
+  </body>
+</html>
